@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: Nexar
+    env: php
+    region: oregon
+    buildCommand: |
+      composer install
+      php artisan key:generate
+      npm install
+      npm run prod
+    startCommand: "php artisan serve --host 0.0.0.0 --port 10000"
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        value: dpg-cr8fnl56l47c739ckmtg-a
+      - key: DB_DATABASE
+        value: nexar
+      - key: DB_USERNAME
+        value: nexar_user
+      - key: DB_PASSWORD
+        value: SevKD7eyk4DF00YgozY5rgkWpvBOFqlr
+    plan: standard
