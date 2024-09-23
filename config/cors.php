@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', '/csrf', 'sanctum/csrf-cookie'], // Add necessary paths
+    'paths' => ['api/*', 'sanctum/csrf-cookie'], // Add necessary paths
 
     'allowed_methods' => ['*'], // Allow all HTTP methods
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:5173')], // Vite frontend URL
+    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:5173')],
 
     'allowed_origins_patterns' => [],
 

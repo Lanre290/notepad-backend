@@ -4,6 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use App\Http\Controllers\Views;
+
+
+Route::get('/note', [Views::class, 'notes'])->middleware('validate.token');
+Route::get('/note/{id}', [Views::class, 'notes'])->middleware('validate.token');
+Route::post('/delete/{id}', [UserActions::class, 'delete'])->middleware('validate.token');
+Route::post('/create', [UserActions::class, 'createNote'])->middleware('validate.token');
+Route::post('/save', [UserActions::class, 'updateNote'])->middleware('validate.token');
+
+
 
 
 // Route::get('/jwt', function () {

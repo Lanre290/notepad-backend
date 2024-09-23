@@ -11,6 +11,10 @@ class ValidateToken
 {
     public function handle(Request $request, Closure $next)
     {
+        if(null == session('user')){
+            return response()->json(['error', 'Unauthorised_access.'], 401);
+        }
+
         $token = $request->header('Authorization');
 
         if (!$token) {

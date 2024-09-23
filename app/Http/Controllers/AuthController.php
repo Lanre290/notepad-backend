@@ -154,7 +154,13 @@ class AuthController extends Controller
             }
             else{
                 $data = Users::where('email', $email)->first();
-                $token = $this->userActions->generateLink();
+
+                $payload = [
+                    'sub' => $email,
+                    'exp' => now()->addHours(2)->timestamp,
+                ];
+
+                $token = JWT::encode($payload, env('JWT_SECRET'), 'HS256');
                 $data['link'] = $token;
                 
                 $fg = ForgottenPasswordModel::create([
