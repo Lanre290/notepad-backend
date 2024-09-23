@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+    // Authentication routes
+Route::post('auth/signup', [AuthController::class, 'signup'])->name('api/auth/signup');
+Route::post('auth/login', [AuthController::class, 'login'])->name('api/auth/login');
+Route::post('auth/logout', [AuthController::class, 'logout'])->name('api/auth/logout');
+
+Route::get('/csrf', function(){
+    return csrf_token();
+});

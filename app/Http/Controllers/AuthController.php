@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class AuthController extends Controller
 {
@@ -51,7 +55,6 @@ class AuthController extends Controller
             'email' => 'required|string',
             'pwd' => 'required|string'
         ]);
-
         
 
         $email = $request->email;
@@ -69,9 +72,22 @@ class AuthController extends Controller
                 $Hashedpwd = Users::where('email', $email)->pluck('pwd')->first();
                 
                 if(Hash::check($pwd, $Hashedpwd)){
+                    $payload = [
+                        'sub' => $email,
+                        'exp' => now()->addHours(2)->timestamp,
+                    ];
+
+                    $accessToken = JWT::encode($payload, env('JWT_SECRET'), 'HS256');
+
+                    $refreshPayload = [
+                        'sub' => $email,
+                        'exp' => now()->addDays(7)->timestamp, 
+                    ];
+                    $refreshToken = JWT::encode($refreshPayload, env('JWT_SECRET'), 'HS256');
+
                     $userData = Users::where('email', $email)->select('id','email','name')->first();
                     session(['user' => $userData]);
-                    return response(['data' => true], 200);
+                    return response(['data' => true, 'access_token' => $accessToken, 'refresh_token' => $refreshToken], 200);
                 }
                 else{
                     return response(['error' => 'Incorrect password.', 'data' => ''], 404);
@@ -183,4 +199,19 @@ class AuthController extends Controller
 
         session()->flush();
     }
+
+
+    public function validateToken(Request $request){
+        $token = $request->header('Authorization');
+
+        try {
+            $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256')); // Use your JWT secret
+            // If needed, check additional claims or user info here
+            return response()->json(['decoded' => $decoded]);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'invalid_token'], 401);
+        }
+    }
+
+
 }
