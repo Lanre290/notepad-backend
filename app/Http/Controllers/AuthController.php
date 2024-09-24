@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 
 class AuthController extends Controller
 {
@@ -150,7 +150,7 @@ class AuthController extends Controller
         else{
             $emailExists = Users::where('email', $email)->count();
             if($emailExists < 1){
-                return response()->json(['error' => 'Email does not exist.', 'data' => ''], 404);
+                return response()->json(['error' => 'Email does not exist.'], 404);
             }
             else{
                 $data = Users::where('email', $email)->first();
@@ -207,17 +207,16 @@ class AuthController extends Controller
     }
 
 
-    public function validateToken(Request $request){
-        $token = $request->header('Authorization');
+    // public function validateToken(Request $request){
+    //     $token = $request->header('Authorization');
 
-        try {
-            $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256')); // Use your JWT secret
-            // If needed, check additional claims or user info here
-            return response()->json(['decoded' => $decoded]);
-        } catch (Exception $e) {
-            return response()->json(['error' => 'invalid_token'], 401);
-        }
-    }
+    //     try {
+    //         $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
+    //         return response()->json(['decoded' => $decoded]);
+    //     } catch (Exception $e) {
+    //         return response()->json(['error' => 'invalid_token'], 401);
+    //     }
+    // }
 
 
 }

@@ -23,7 +23,6 @@ class ValidateToken
 
         try {
             $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
-            // Optionally, you can attach the decoded info to the request
             $request->attributes->add(['user' => $decoded]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'invalid_token'], 401);
