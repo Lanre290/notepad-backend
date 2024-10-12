@@ -14,8 +14,8 @@ Route::delete('/delete/{id}', [UserActions::class, 'delete'])->middleware('valid
 Route::post('/create', [UserActions::class, 'createNote'])->middleware('validate.token');
 Route::put('/save', [UserActions::class, 'updateNote'])->middleware('validate.token');
 
-Route::put('/api/auth/signup', [AuthController::class, 'signup']);
-Route::put('/api/auth/login', [AuthController::class, 'login']);
+Route::post('/api/auth/signup', [AuthController::class, 'signup']);
+Route::post('/api/auth/login', [AuthController::class, 'login']);
 
 
 Route::options('{any}', function () {
