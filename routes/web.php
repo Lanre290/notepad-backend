@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserActions;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use App\Http\Controllers\Views;

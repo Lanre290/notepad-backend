@@ -17,11 +17,11 @@ services:
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        value: dpg-cr8fnl56l47c739ckmtg-a
+        value: dpg-cs4penjqf0us73b61u0g-a
       - key: DB_DATABASE
-        value: nexar
+        value: notepad_dzby
       - key: DB_USERNAME
-        value: nexar_user
+        value: notepad
       - key: DB_PASSWORD
-        value: SevKD7eyk4DF00YgozY5rgkWpvBOFqlr
+        value: hXwURjLT6fSaKFsNrnsPYpMGheqpdsuU
     plan: standard
