@@ -1,5 +1,6 @@
 FROM richarvey/nginx-php-fpm:2.1.2
 
+
 COPY . .
 
 # Image config
@@ -13,6 +14,8 @@ ENV REAL_IP_HEADER 1
 ENV APP_ENV production
 ENV APP_DEBUG false
 ENV LOG_CHANNEL stderr
+
+RUN composer install --no-dev --optimize-autoloader
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
