@@ -28,7 +28,8 @@ WORKDIR /var/www/html
     
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader && php artisan migrate --force
+RUN composer install --no-dev --optimize-autoloader
+RUN php artisan migrate --force
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
