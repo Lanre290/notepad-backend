@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: Nexar
+    name: notepad
     env: php
     region: oregon
     buildCommand: |
-      composer install
+      composer install --no-dev --optimize-autoloader
       php artisan key:generate
       npm install
       npm run prod
