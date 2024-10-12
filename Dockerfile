@@ -8,7 +8,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip
 
 # Install Nginx
-RUN apt-get update && apt-get install -y nginx
+RUN apt-get update && apt-get install -y nginx \
+    libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql
 
 # Copy Nginx configuration
 COPY ./nginx.conf /etc/nginx/sites-available/default
@@ -21,6 +23,9 @@ COPY . /var/www/html
 
 # Change directory
 WORKDIR /var/www/html
+
+
+    
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
