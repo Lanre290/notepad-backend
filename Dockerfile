@@ -18,3 +18,6 @@ WORKDIR /var/www/html
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
+
+EXPOSE 80
+
