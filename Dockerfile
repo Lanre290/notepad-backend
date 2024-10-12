@@ -7,6 +7,12 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install zip
 
+# Install Nginx
+RUN apt-get update && apt-get install -y nginx
+
+# Copy Nginx configuration
+COPY ./nginx.conf /etc/nginx/sites-available/default
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
