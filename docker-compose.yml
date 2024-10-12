@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Ensure this path is correct
+      - ./path/to/your/public:/var/www/html/public
+
+  php:
+    image: php:8.1-fpm
+    volumes:
+      - ./path/to/your/app:/var/www/html
