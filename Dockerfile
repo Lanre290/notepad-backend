@@ -21,3 +21,5 @@ RUN composer install --no-dev --optimize-autoloader
 
 EXPOSE 80
 
+# Start both PHP-FPM and Nginx
+CMD service nginx start && php-fpm

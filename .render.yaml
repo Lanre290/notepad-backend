@@ -8,7 +8,7 @@ services:
       php artisan key:generate
       npm install
       npm run prod
-    startCommand: "php artisan serve --host 0.0.0.0 --port 80"
+    startCommand: "service nginx start && php-fpm"
     envVars:
       - key: APP_ENV
         value: production
@@ -25,3 +25,6 @@ services:
       - key: DB_PASSWORD
         value: hXwURjLT6fSaKFsNrnsPYpMGheqpdsuU
     plan: standard
+    ports:
+      - "80:80"
+
