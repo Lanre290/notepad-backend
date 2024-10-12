@@ -1,5 +1,5 @@
-# Install PHP and Composer in Dockerfile
-FROM php:8.1-fpm
+# Use PHP 8.2 as base image
+FROM php:8.2-fpm
 
 # Install necessary PHP extensions
 RUN apt-get update && apt-get install -y \
