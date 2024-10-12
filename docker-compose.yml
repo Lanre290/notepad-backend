@@ -13,3 +13,23 @@ services:
     image: php:8.1-fpm
     volumes:
       - ./path/to/your/app:/var/www/html
+
+  environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=dpg-cs4penjqf0us73b61u0g-a
+      - DB_PORT=5432
+      - DB_DATABASE=notepad_dzby
+      - DB_USERNAME=notepad
+      - DB_PASSWORD=hXwURjLT6fSaKFsNrnsPYpMGheqpdsuU
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: notepad_dzby
+      POSTGRES_USER: notepad
+      POSTGRES_PASSWORD: hXwURjLT6fSaKFsNrnsPYpMGheqpdsuU
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
