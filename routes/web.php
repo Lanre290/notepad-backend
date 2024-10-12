@@ -15,6 +15,10 @@ Route::post('/create', [UserActions::class, 'createNote'])->middleware('validate
 Route::put('/save', [UserActions::class, 'updateNote'])->middleware('validate.token');
 
 
+Route::options('{any}', function () {
+    return response()->json([], 204);
+})->where('any', '.*');
+
 
 
 // Route::get('/jwt', function () {
