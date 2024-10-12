@@ -11,7 +11,7 @@ class Views extends Controller
         $id = $id ? $id : $request->id;
 
         if($id = '' || null == session('user')){
-            $notes = Notes::all()->orderBy('timestamp', 'DESC');
+            $notes = Notes::where('user', $user_id)->orderBy('timestamp', 'DESC')->get();
 
             return response()->json([$notes], 200);
         }

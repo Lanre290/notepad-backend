@@ -15,6 +15,7 @@ Route::post('/create', [UserActions::class, 'createNote'])->middleware('validate
 Route::put('/save', [UserActions::class, 'updateNote'])->middleware('validate.token');
 
 Route::put('/api/auth/signup', [AuthController::class, 'signup']);
+Route::put('/api/auth/login', [AuthController::class, 'login']);
 
 
 Route::options('{any}', function () {
